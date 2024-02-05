@@ -1,21 +1,22 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        "blogs" => Blog::all()
+    ]);
 });
+
+//? Matches according to the slug
+Route::get("/blog/view/{blog:slug}", function (Blog $blog) {
+    return view("view-blog", [
+        "blog" => $blog
+    ]);
+});
+// ->whereNumber("blog");
 
 Route::get("/about", function () {
 
