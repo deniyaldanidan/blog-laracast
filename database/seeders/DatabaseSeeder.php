@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        User::truncate();
+        Blog::truncate();
+        Category::truncate();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $users = User::factory()->count(6)->create();
+        $categories = Category::factory()->count(4)->create();
+
+
+        foreach ($users as $user) {
+            for ($i = 0; $i < rand(3, 10); $i++) {
+                Blog::factory()->create([
+                    "user_id" => $user->id,
+                    "category_id" => $categories->random()->id
+                ]);
+            }
+        }
+
     }
 }

@@ -13,7 +13,8 @@ class Blog extends Model
         "title",
         "excerpt",
         "body",
-        "slug"
+        "slug",
+        "category_id"
     ];
 
     // protected $guarded = ["id"];
@@ -25,4 +26,15 @@ class Blog extends Model
         return "slug";
     }
     */
+
+    //*Relations
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, "user_id", "id");
+    }
 }
