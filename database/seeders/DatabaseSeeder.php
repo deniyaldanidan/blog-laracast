@@ -21,17 +21,17 @@ class DatabaseSeeder extends Seeder
         Category::truncate();
 
         $users = User::factory()->count(6)->create();
-        $categories = Category::factory()->count(4)->create();
+        $categories = Category::factory()->count(15)->create();
 
 
-        foreach ($users as $user) {
-            for ($i = 0; $i < rand(3, 10); $i++) {
-                Blog::factory()->create([
-                    "user_id" => $user->id,
-                    "category_id" => $categories->random()->id
-                ]);
-            }
+
+        for ($i = 0; $i < 100; $i++) {
+            Blog::factory()->create([
+                "user_id" => $users->random()->id,
+                "category_id" => $categories->random()->id
+            ]);
         }
+
 
     }
 }

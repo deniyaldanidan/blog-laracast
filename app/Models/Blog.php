@@ -19,6 +19,9 @@ class Blog extends Model
 
     // protected $guarded = ["id"];
 
+    //* Eager load defaults
+    // protected $with = ['category', 'author'];
+
     /*
     //* Following method will make slug as a default route binder. If this is removed default will be id aka Primary Key
     public function getRouteKeyName()
