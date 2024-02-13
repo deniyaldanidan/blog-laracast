@@ -12,9 +12,10 @@
         {{-- Metas --}}
         <div class="mb-7 flex items-center justify-between">
             <div class="{{ $metaClasses }}">
-                <a href="/blogs/author/{{ $blog->author->username }}" class="{{ $metaAnchorClasses }}">by
+                <a href="{{ route('home') . '?author=' . $blog->author->username }}" class="{{ $metaAnchorClasses }}">by
                     {{ $blog->author->name }}</a>
-                <a href="/blogs/category/{{ $blog->category->slug }}" class="{{ $metaAnchorClasses }}">Category:
+                <a href="{{ route('home') . '?category=' . $blog->category->slug }}"
+                    class="{{ $metaAnchorClasses }}">Category:
                     {{ $blog->category->name }}</a>
             </div>
             <div class="{{ $metaClasses }}">
@@ -38,10 +39,19 @@
             @endforeach
         </div>
         {{-- Ending Symbols Did it with Asterisk --}}
-        <div class="flex items-center justify-center gap-x-5 text-5xl font-bold">
+        <div class="mb-10 flex items-center justify-center gap-x-5 text-5xl font-bold">
             <span>&#x2a;</span>
             <span>&#x2a;</span>
             <span>&#x2a;</span>
+        </div>
+        {{-- Comment-Form comes here --}}
+        <div>
+            <h2 class="text-xl font-bold uppercase underline underline-offset-[3px]">Comments (5)</h2>
+            <div class="mt-7 flex flex-col gap-y-7">
+                <x-comment />
+                <x-comment />
+                <x-comment />
+            </div>
         </div>
     </div>
 </x-layout-main>

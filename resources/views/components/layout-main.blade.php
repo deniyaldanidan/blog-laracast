@@ -63,6 +63,15 @@
     @include('partials.subscribe-section')
     <x-main-footer />
     <h1 class="bg-black text-white"></h1>
+    {{-- <x-toast :message="'Hello Good Day'" status="warn" /> --}}
+    @if (session()->has('success'))
+        <x-toast :message="session('success')" :status="'success'" />
+    @endif
+    @if (session()->has('error'))
+        <x-toast :message="session('error')" :status="'error'" />
+    @endif
+
+    <script src="/js/toast-script.js"></script>
 </body>
 
 </html>

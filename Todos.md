@@ -1,7 +1,9 @@
 # Todos
 
-> What about intro-description-text in HomePage. Does it needed?. Shall we remove it?
+## Main Todos
+- [ ] Finish All Laracasts videos
+- [ ] Checkout Laravel 10 updates series
+- [ ] Finish this app
 
-- [ ] Finish the clean-way search.
-- [ ] Move all fns from `web.php` to their appr.. controllers.
-- [ ] Dry the blogs wrapper and page-head section
+## Current Todos
+- [ ] Build a static Comment Component

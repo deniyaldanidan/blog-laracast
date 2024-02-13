@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +30,26 @@ class Blog extends Model
         return "slug";
     }
     */
+
+    //* Additional Methods
+    public function scopeFilter(Builder $query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function (Builder $query, string $search) {
+            $query->where(function (Builder $query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%')
+                    ->orWhere('excerpt', 'like', '%' . $search . '%');
+            });
+        });
+
+        $query->when($filters['category'] ?? false, function (Builder $query, string $category) {
+            $query->whereHas('category', fn(Builder $query) => $query->where('slug', $category));
+        });
+
+        $query->when($filters['author'] ?? false, function (Builder $query, string $author) {
+            $query->whereHas('author', fn(Builder $query) => $query->where('username', $author));
+        });
+    }
 
     //*Relations
     public function category()

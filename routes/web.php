@@ -1,62 +1,27 @@
 <?php
 
-use App\Models\Blog;
-use App\Models\Category;
-use App\Models\User;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-// move all to their appr.. controllers
-Route::get('/', function () {
-    $blogs = Blog::latest("updated_at")->with(["category", "author"]);
 
-    if (request('search')) {
-        $blogs->where('title', 'like', '%' . request('search') . '%')
-            ->orWhere('body', 'like', '%' . request('search') . '%')
-            ->orWhere('excerpt', 'like', '%' . request('search') . '%');
-    }
+Route::get('/', [BlogController::class, "index"])->name("home");
 
-    return view('home', [
-        "blogs" => $blogs->get()
-    ]);
-})->name("home");
-
-Route::get("/blog/view/{blog:slug}", function (Blog $blog) {
-    // $blog = Blog::with(["category", "author"])->firstWhere("slug", $blog);
-    /*
-    if (!$blog) {
-        return abort(404);
-    }
-    */
-
-    return view("view-blog", [
-        "blog" => $blog
-    ]);
-})->name("blog-view"); // ->whereNumber("blog");
-
-Route::get("/blogs/category/{category:slug}", function (Category $category) {
-    return view("categories", [
-        "category" => $category,
-    ]);
-})->name("category");
-
-Route::get("/blogs/author/{author:username}", function (User $author) {
-    return view("author-blogs", [
-        "author" => $author
-    ]);
-})->name("author-blogs");
+Route::get("/blog/view/{blog:slug}", [BlogController::class, "view"])->name("blog-view");
 
 Route::get("/about", function () {
-
-    $word = "user";
-
-    $info = cache()->remember("about.info", 60 * 60 /*! in seconds, cache remain for 3600secs */, function () use ($word) {
-        return "Hello $word";
-    });
-
+    // dd();
     return view("about", [
-        "info" => $info
+        "info" => "Apple is awesome"
     ]);
 })->name("about");
 
-// collect()->
-// abort, redirect, ddd, die
+Route::get("/register", [RegisterController::class, "create"])->name("register")->middleware("guest");
+Route::post("/register", [RegisterController::class, "store"])->middleware("guest");
+
+Route::get("/login", [LoginController::class, "loginView"])->name("login")->middleware("guest");
+Route::post("/login", [LoginController::class, "login"])->middleware("guest");
+
+Route::post("/logout", [LogoutController::class, "logout"])->name("logout")->middleware("auth");

@@ -22,8 +22,21 @@ class CategoryDropDown extends Component
      */
     public function render(): View|Closure|string
     {
+        $categories = Category::all();
+        $categoryInp = request('category');
+        $default = '';
+        if ($categoryInp) {
+            $default =
+                $categories->first(function ($myCat) use ($categoryInp) {
+                    return $myCat->slug === $categoryInp;
+                })->name ?? 'all';
+        } else {
+            $default = 'all';
+        }
+
         return view('components.category-drop-down', [
-            "categories" => Category::all()
+            "categories" => $categories,
+            "default" => $default
         ]);
     }
 }

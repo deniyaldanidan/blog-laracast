@@ -10,8 +10,11 @@
         every click brings you closer to discovery and enlightenment.
     </h3>
     <div class="flex items-center justify-center gap-x-9">
-        <x-category-drop-down defaultValue="All" />
+        <x-category-drop-down />
+        <x-author-drop-down />
         <x-search-bar />
+        <a href="/"
+            class="bg-secondary hover:bg-accent rounded-xl px-8 py-2 text-lg font-semibold duration-150">Reset all</a>
     </div>
     @if ($blogs->count() >= 1)
         <div class="mt-20 flex flex-wrap items-center justify-center gap-8">
@@ -23,8 +26,10 @@
                     categoryName="{{ $blog->category->name }}" />
             @endforeach
         </div>
+        <x-pagination :currentPage="$blogs->currentPage()" :lastPage="$blogs->lastPage()" />
     @else
-        <div class="mt-20 text-center text-xl uppercase">Sorry, No blogs found.</div>
+        <div class="mt-24 text-center text-xl font-bold uppercase">Sorry, No blogs found.</div>
     @endif
+    <script src="/js/dropdown-script.js"></script>
 
 </x-layout-main>
