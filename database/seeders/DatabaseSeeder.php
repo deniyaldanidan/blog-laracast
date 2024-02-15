@@ -6,8 +6,10 @@ namespace Database\Seeders;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,20 +18,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::truncate();
-        Blog::truncate();
+        // User::truncate();
+        DB::statement("Delete from users");
+        DB::statement("Delete from blogs");
+        // Blog::truncate();
         Category::truncate();
+        Comment::truncate();
 
-        $users = User::factory()->count(6)->create();
+        $users = User::factory()->count(8)->create();
         $categories = Category::factory()->count(15)->create();
 
 
 
-        for ($i = 0; $i < 100; $i++) {
-            Blog::factory()->create([
+        for ($i = 0; $i < 120; $i++) {
+            $blog = Blog::factory()->create([
                 "user_id" => $users->random()->id,
                 "category_id" => $categories->random()->id
             ]);
+
+            for ($j = 0; $j < rand(0, 8); $j++) {
+                Comment::factory()->create([
+                    "user_id" => $users->random()->id,
+                    "blog_id" => $blog->id
+                ]);
+            }
         }
 
 

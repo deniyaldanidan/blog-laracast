@@ -6,4 +6,4 @@
 - [ ] Finish this app
 
 ## Current Todos
-- [ ] Build a static Comment Component
+- [ ] Write out remaining todos.

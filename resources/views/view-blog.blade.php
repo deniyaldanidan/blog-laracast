@@ -2,6 +2,7 @@
     $paragraphs = collect(explode("\n", $blog->body));
     $metaClasses = 'flex items-center justify-center gap-x-7 text-base font-bold text-slate-700';
     $metaAnchorClasses = 'hover:text-accent underline duration-100';
+    $comments = $blog->comments;
 @endphp
 <x-layout-main :title="$blog->title">
     <div class="mx-auto max-w-[1000px]">
@@ -44,14 +45,19 @@
             <span>&#x2a;</span>
             <span>&#x2a;</span>
         </div>
-        {{-- Comment-Form comes here --}}
-        <div>
-            <h2 class="text-xl font-bold uppercase underline underline-offset-[3px]">Comments (5)</h2>
+        @auth
+            <x-comment-form :blogId="$blog->id" />
+        @endauth
+        @if ($comments->count() >= 1)
+            <h2 class="text-xl font-bold uppercase underline underline-offset-[3px]">Comments
+                ({{ $comments->count() }})</h2>
             <div class="mt-7 flex flex-col gap-y-7">
-                <x-comment />
-                <x-comment />
-                <x-comment />
+                @foreach ($comments as $comment)
+                    <x-comment :comment="$comment" />
+                @endforeach
             </div>
-        </div>
+        @else
+            <h2 class="text-center text-xl font-semibold">No comments yet!</h2>
+        @endif
     </div>
 </x-layout-main>

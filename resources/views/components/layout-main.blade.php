@@ -52,10 +52,14 @@
                 }
             }
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
-<body class="bg-background text-foreground m-0">
+<body class="bg-background text-foreground m-0 scroll-smooth">
     <x-main-header />
     <main class="px-space min-h-screen py-10">
         {{ $slot }}

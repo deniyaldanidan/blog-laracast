@@ -29,9 +29,9 @@ class CategoryDropDown extends Component
             $default =
                 $categories->first(function ($myCat) use ($categoryInp) {
                     return $myCat->slug === $categoryInp;
-                })->name ?? 'all';
+                })->name ?? 'All';
         } else {
-            $default = 'all';
+            $default = 'All';
         }
 
         return view('components.category-drop-down', [

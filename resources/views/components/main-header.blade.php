@@ -19,7 +19,7 @@
             <a href="/register"
                 class="{{ $menuClasses . (request()->routeIs('register') ? ' underline' : '') }}">Register</a>
         @endguest
-        <a href="#"
+        <a href="#subscribe-section"
             class="bg-primary text-background hover:bg-accent hover:text-foreground rounded-2xl px-8 py-[7.5px] text-lg font-semibold capitalize duration-100">subscribe</a>
     </div>
 </header>
