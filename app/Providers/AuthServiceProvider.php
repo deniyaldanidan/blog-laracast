@@ -28,8 +28,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Gate::define("delete-comment", function (User $user, Comment $comment) {
-        //     return ($comment->user_id === $user->id) ? Response::allow() : Response::deny("Sorry, This is not you're comment", HttpResponse::HTTP_FORBIDDEN);
-        // });
+        Gate::define("isAdmin", function (User $user) {
+            return (is_array($user->roles) && in_array("admin", $user->roles)) ? Response::allow() : Response::denyWithStatus(HttpResponse::HTTP_FORBIDDEN, "You don't have required permission.");
+        });
+        Gate::define("isAuthor", function (User $user) {
+            return (is_array($user->roles) && in_array("author", $user->roles)) ? Response::allow() : Response::denyWithStatus(HttpResponse::HTTP_FORBIDDEN, "You need to be an author to access this resource.");
+        });
     }
 }

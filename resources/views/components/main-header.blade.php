@@ -8,7 +8,7 @@
         <a href="/" class="{{ $menuClasses . (request()->routeIs('home') ? ' underline' : '') }}">Home</a>
         <a href="/about" class="{{ $menuClasses . (request()->routeIs('about') ? ' underline' : '') }}">About</a>
         @auth
-            <a href="#" class="{{ $menuClasses }}">Hi, {{ auth()->user()->name }}</a>
+            <x-user-menu-dropdown />
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <input type="submit" value="logout" class="{{ $menuClasses }}">

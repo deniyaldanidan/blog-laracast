@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
@@ -32,3 +33,9 @@ Route::post("/login", [LoginController::class, "login"])->middleware("guest");
 Route::post("/logout", [LogoutController::class, "logout"])->name("logout")->middleware("auth");
 
 Route::post("/newsletter", NewsletterController::class);
+
+Route::get("/admin", [AdminController::class, "index"])->middleware("can:isAdmin")->name("admin-dashboard");
+
+Route::get("/author", function () {
+    return "You're author";
+})->middleware("can:isAuthor");

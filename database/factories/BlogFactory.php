@@ -32,7 +32,8 @@ class BlogFactory extends Factory
             "excerpt" => $this->faker->realTextBetween(180, 220, 5),
             "body" => implode("\n", $paragraphs),
             "category_id" => Category::factory(),
-            "user_id" => User::factory()
+            "user_id" => User::factory(),
+            "published_at" => now()
         ];
     }
 }

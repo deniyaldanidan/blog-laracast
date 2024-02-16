@@ -22,7 +22,10 @@ class AuthorDropDown extends Component
      */
     public function render(): View|Closure|string
     {
-        $authors = User::orderBy("name", "asc")->select("username", "name")->get()->collect();
+        $authorsResult = User::orderBy("name", "asc")->get()->collect();
+        $authors = $authorsResult->filter(function (User $user) {
+            return (is_array($user->roles) && in_array("author", $user->roles));
+        });
         $authorInp = request('author');
         $default = '';
         if ($authorInp) {

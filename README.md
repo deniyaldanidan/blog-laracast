@@ -15,3 +15,19 @@ Hash::check('p@$$m3In', $user->password); // will return true is passed. false i
 
 <script src="/js/toast-scripts.js"></script>
 ```
+
+## Valid user roles
+```php
+["admin", "author"]
+```
+
+## Custom Blade If's
+```php
+@isAdmin
+    <h2>Hello, Admin</h2>
+@endisAdmin
+
+@isAuthor
+    <h2>Hello, Author</h2>
+@endisAuthor
+```

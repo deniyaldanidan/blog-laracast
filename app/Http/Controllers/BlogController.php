@@ -11,7 +11,7 @@ class BlogController extends Controller
     {
 
         return view('home', [
-            "blogs" => Blog::latest("updated_at")->with(["category", "author"])->filter(request()->only('search', 'category', 'author'))->paginate(8)
+            "blogs" => Blog::whereNotNull("published_at")->latest("published_at")->with(["category", "author"])->filter(request()->only('search', 'category', 'author'))->paginate(8)
         ]);
     }
 

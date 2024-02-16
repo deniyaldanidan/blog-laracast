@@ -30,12 +30,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /**
-         * Will merge queries
-         * 
-         */
-        // Blade::directive("querymerger", function (array $queryToMerge): string {
-        //     return "?" . request()->collect()->merge($queryToMerge)->map(fn($value, $key) => "$key=$value")->values()->join("&");
-        // });
+        // isadmin-blade-if
+        Blade::if("isAdmin", function () {
+            return auth()->check() && request()->user()->can("isAdmin");
+        });
+
+        // isauthor-blade-if
+        Blade::if("isAuthor", function () {
+            return auth()->check() && request()->user()->can("isAuthor");
+        });
     }
 }
