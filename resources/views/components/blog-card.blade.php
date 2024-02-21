@@ -18,18 +18,10 @@
         <div>
             {{ $blogExcerpt }}
             &emsp;
-            <a href="{{ route('blog-view', ['blog' => $blogSlug]) }}"
-                class="hover:text-accent font-bold text-slate-600 underline">Read
+            <a href="{{ $blogUrl }}" class="hover:text-accent font-bold text-slate-600 underline">Read
                 More
                 {{ '>>' }} </a>
         </div>
 
     </div>
 </article>
-
-{{-- blogId, blogTitle, blogExcerpt, createdAt, updatedAt, username, authorName, blogSlug, blogBody, categorySlug, categoryName --}}
-
-{{-- <x-blog-card :blogId="$blog->id" :blogTitle="$blog->title" :blogExcerpt="$blog->excerpt"
-    createdAt="{{ $blog->created_at->diffForHumans() }}" updatedAt="{{ $blog->updated_at->diffForHumans() }}"
-    :username="$blog->author->username" :authorName="$blog->author->name" :blogSlug="$blog->slug" :blogBody="$blog->body"
-    categorySlug="{{ $blog->category->slug }}" categoryName="{{ $blog->category->name }}" /> --}}

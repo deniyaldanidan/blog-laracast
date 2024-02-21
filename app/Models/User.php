@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function author_request()
+    {
+        return $this->hasOne(AuthorRequests::class);
+    }
 }

@@ -44,6 +44,39 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        $user = User::factory()->create([
+            "username" => "sandra",
+            "email" => "sandra@sample.com",
+            "name" => "sandra davis"
+        ]);
+        $user->roles = ["admin"];
+        $user->save();
 
+        User::factory()->createMany([
+            [
+                "username" => "allen",
+                "email" => "allenberg@sample.com",
+                "name" => "allen walberg",
+                "roles" => null
+            ],
+            [
+                "username" => "dave",
+                "email" => "davewat@sample.com",
+                "name" => "dave watson",
+                "roles" => null
+            ],
+            [
+                "username" => "avamax",
+                "email" => "avamax@sample.com",
+                "name" => "ava max",
+                "roles" => null
+            ],
+            [
+                "username" => "sarah",
+                "email" => "sarah_fae@sample.com",
+                "name" => "sarah fae",
+                "roles" => null
+            ]
+        ]);
     }
 }

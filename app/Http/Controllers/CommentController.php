@@ -15,6 +15,8 @@ class CommentController extends Controller
             "blogid" => ["required", "integer", "exists:blogs,id"],
             "content" => ["required", "string", "max:1000", "min:2"]
         ]);
+
+        // request()->user()->create()
         Comment::create(["content" => (string) $request->input("content"), "blog_id" => (int) $request->input("blogid"), "user_id" => auth()->user()->id]);
         return back()->with("success", "Comment is created successfully");
     }

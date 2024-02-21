@@ -23,7 +23,7 @@
                     createdAt="{{ $blog->created_at->diffForHumans() }}"
                     updatedAt="{{ $blog->updated_at->diffForHumans() }}" :username="$blog->author->username" :authorName="$blog->author->name"
                     :blogSlug="$blog->slug" :blogBody="$blog->body" categorySlug="{{ $blog->category->slug }}"
-                    categoryName="{{ $blog->category->name }}" />
+                    categoryName="{{ $blog->category->name }}" :blogUrl="route('blog-view', ['blog' => $blog->slug])" />
             @endforeach
         </div>
         <x-pagination :currentPage="$blogs->currentPage()" :lastPage="$blogs->lastPage()" />

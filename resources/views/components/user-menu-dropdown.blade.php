@@ -9,11 +9,11 @@
     <div class="absolute top-full h-fit w-full flex-col gap-y-1 rounded-md bg-slate-200 data-[state=open]:flex data-[state=close]:hidden data-[state=close]:translate-y-0 data-[state=open]:translate-y-1"
         data-state="close">
         @cannot('isAuthor')
-            <a href="#" class="{{ $dropAnchorClasses }}">Be Author</a>
+            <a href="{{ route('be-author') }}" class="{{ $dropAnchorClasses }}">Be Author</a>
         @endcannot
         @can('isAuthor')
-            <a href="#" class="{{ $dropAnchorClasses }}">Write blog</a>
-            <a href="#" class="{{ $dropAnchorClasses }}">My blogs</a>
+            <a href="{{ route('write-blog') }}" class="{{ $dropAnchorClasses }}">Write blog</a>
+            <a href="{{ route('my-blogs') }}" class="{{ $dropAnchorClasses }}">My blogs</a>
         @endcan
         @can('isAdmin')
             <a href="{{ route('admin-dashboard') }}" class="{{ $dropAnchorClasses }}">admin dashboard</a>
